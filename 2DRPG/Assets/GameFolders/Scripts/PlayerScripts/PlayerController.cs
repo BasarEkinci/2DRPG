@@ -77,6 +77,7 @@ namespace TDRPG.PlayerScripts
             transform.localScale = scale;
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         private void Attack()
         {
             int num = Random.Range(0, 2);
@@ -84,7 +85,7 @@ namespace TDRPG.PlayerScripts
                 animator.SetTrigger("Attack1");
             else
                 animator.SetTrigger("Attack2");
-
+            
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackDistance, enemyLayer);
 
             foreach (Collider2D enemy in hitEnemies)

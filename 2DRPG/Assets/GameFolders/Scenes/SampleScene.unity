@@ -488,6 +488,7 @@ GameObject:
   - component: {fileID: 526922544}
   - component: {fileID: 526922543}
   - component: {fileID: 526922547}
+  - component: {fileID: 526922548}
   m_Layer: 9
   m_Name: Enemy_Green
   m_TagString: Enemy
@@ -509,6 +510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   deathEffect: {fileID: 555526630566411772, guid: cb7f431fbef897e4ab37c093e204f135, type: 3}
+  effectTimer: 0.2
 --- !u!61 &526922544
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -555,7 +557,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d45429953dd10f944819e31cc459de84, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -622,6 +624,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &526922548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526922542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b835c6b2329d9dd4396cb9dfd9f0b900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  hitMat: {fileID: 2100000, guid: d45429953dd10f944819e31cc459de84, type: 2}
 --- !u!1 &615443513
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,7 +816,7 @@ MonoBehaviour:
   speed: 5
   jumpForce: 5
   attackPoint: {fileID: 1802670364}
-  attackDistance: 0.12
+  attackDistance: 0.19
   attackRate: 1
   enemyLayer:
     serializedVersion: 2
