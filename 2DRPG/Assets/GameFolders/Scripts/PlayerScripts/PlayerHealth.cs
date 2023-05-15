@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using TDRPG.EnemyScripts;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TDRPG.PlayerScripts
 {
@@ -12,7 +11,13 @@ namespace TDRPG.PlayerScripts
 
         private float maxHealth = 100f;
         private float currentHealth;
-
+        [SerializeField] private Image healthBar;
+        private Animator animator;
+        private bool isImmune;
+        private void Awake()
+        {
+            animator = GetComponent<Animator>();
+        }
 
         private void Start()
         {
@@ -21,26 +26,35 @@ namespace TDRPG.PlayerScripts
 
         private void Update()
         {
+            healthBar.fillAmount = currentHealth / 100f;
+            
             if (currentHealth >= maxHealth)
             {
                 currentHealth = maxHealth;
             }
-            
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.CompareTag("Enemy"))
+            if (other.gameObject.CompareTag("Enemy") && !isImmune)
             {
                 currentHealth -= other.GetComponent<EnemyStats>().damage;
+                StartCoroutine("Immunity");
+                animator.SetTrigger("HitTrigger");
 
                 if (currentHealth <= 0)
                 {
-                    Debug.Log("Öldün");
+                    Debug.Log("You're Dead");
                 }
             }
         }
 
+        IEnumerator Immunity()
+        {
+            isImmune = true;
+            yield return new WaitForSecondsRealtime(1f);
+            isImmune = false;
+        }
     }    
 }
 
