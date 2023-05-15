@@ -1,4 +1,5 @@
 using System;
+using TDRPG.EnemyScripts;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -27,6 +28,7 @@ namespace TDRPG.PlayerScripts
         [SerializeField] private float attackDistance;
         [SerializeField] private float attackRate = 1f;
         [SerializeField] private LayerMask enemyLayer;
+        [SerializeField] private float damage;
 
 
         private void Awake()
@@ -87,7 +89,7 @@ namespace TDRPG.PlayerScripts
 
             foreach (Collider2D enemy in hitEnemies)
             {
-                
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
             }
         }
 
@@ -113,6 +115,7 @@ namespace TDRPG.PlayerScripts
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(groundCheck.transform.position,groundCheckRadius);
+            Gizmos.DrawWireSphere(attackPoint.position,attackDistance);
         }
     }
 }
