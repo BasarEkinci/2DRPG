@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using TDRPG.EnemyScripts;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -29,8 +31,7 @@ namespace TDRPG.PlayerScripts
         [SerializeField] private float attackRate = 1f;
         [SerializeField] private LayerMask enemyLayer;
         [SerializeField] private float damage;
-
-
+        
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -45,16 +46,14 @@ namespace TDRPG.PlayerScripts
             CheckSurface();
             Jump();
             LeftRight();
-            
             if (Time.time > nextAttack)
             {
-                if(Input.GetKeyDown(KeyCode.Space))
+                if(Input.GetKey(KeyCode.Space))
                 {
                     Attack();
                     nextAttack = Time.time + 1f / attackRate;
                 }
             }
-            
         }
         private void LeftRight()
         {
@@ -77,15 +76,15 @@ namespace TDRPG.PlayerScripts
             transform.localScale = scale;
         }
 
-        // ReSharper disable Unity.PerformanceAnalysis
+        
         private void Attack()
         {
             int num = Random.Range(0, 2);
-            if(num == 0)
+            if (num == 0)
                 animator.SetTrigger("Attack1");
             else
                 animator.SetTrigger("Attack2");
-            
+
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackDistance, enemyLayer);
 
             foreach (Collider2D enemy in hitEnemies)
@@ -118,6 +117,8 @@ namespace TDRPG.PlayerScripts
             Gizmos.DrawWireSphere(groundCheck.transform.position,groundCheckRadius);
             Gizmos.DrawWireSphere(attackPoint.position,attackDistance);
         }
+
+
     }
 }
 

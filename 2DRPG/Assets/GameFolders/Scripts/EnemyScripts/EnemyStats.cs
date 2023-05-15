@@ -5,16 +5,27 @@ namespace TDRPG.EnemyScripts
 {
     public class EnemyStats : MonoBehaviour
     {
+        [Header("Damage")]
         [SerializeField] private float maxHealth;
+        [SerializeField] private float knockBackForceX;
+        [SerializeField] private float knockBackForceY;
+        
+        [Header("Effects")]
         [SerializeField] private GameObject deathEffect;
         [SerializeField] private float effectTimer;
+
+        [SerializeField] private Transform playerTransform;
         
+        private Rigidbody2D rigidbody2D;
         private float currentHealth;
         private HitEffect hitEffect;
+
+        public float damage = 10f;
 
         private void Awake()
         {
             hitEffect = GetComponent<HitEffect>();
+            rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
         private void Start()
@@ -25,6 +36,17 @@ namespace TDRPG.EnemyScripts
         public void TakeDamage(float damage)
         {
             currentHealth -= damage;
+            
+            
+            if (playerTransform.position.x < transform.position.x)
+            {
+                rigidbody2D.AddForce(new Vector2(knockBackForceX,knockBackForceY),ForceMode2D.Force);    
+            }
+            else
+            {
+                rigidbody2D.AddForce(new Vector2(-knockBackForceX,knockBackForceY),ForceMode2D.Force);
+            }
+            
             GetComponent<SpriteRenderer>().material = hitEffect.hitMat;
             StartCoroutine("BackToNormal");
 
@@ -34,8 +56,7 @@ namespace TDRPG.EnemyScripts
                 Destroy(gameObject);
             }
         }
-
-        // ReSharper disable Unity.PerformanceAnalysis
+        
         IEnumerator BackToNormal()
         {
             yield return new WaitForSeconds(effectTimer);
