@@ -62,13 +62,16 @@ namespace TDRPG.EnemyScripts
             {
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 animator.SetBool("idle",false);
-                if (!isWalkingRight)
+                if(!isWaiter)
                 {
-                    rb.velocity = new Vector2(-moveSpeed * Time.deltaTime, rb.velocity.y);
-                }
-                else
-                {
-                    rb.velocity = new Vector2(moveSpeed * Time.deltaTime, rb.velocity.y);
+                    if (!isWalkingRight)
+                    {
+                        rb.velocity = new Vector2(-moveSpeed * Time.deltaTime, rb.velocity.y);
+                    }
+                    else
+                    {
+                        rb.velocity = new Vector2(moveSpeed * Time.deltaTime, rb.velocity.y);
+                    }
                 }
             }
             
@@ -87,7 +90,6 @@ namespace TDRPG.EnemyScripts
                         {
                             StartCoroutine(Waiting());
                         }
-                        Flip();
                         moveToA = false;
                         moveToB = true;
                     }
@@ -98,15 +100,17 @@ namespace TDRPG.EnemyScripts
                     if (!isWaiting)
                     {
                         rb.velocity = new Vector2(moveSpeed * Time.deltaTime, rb.velocity.y);
+                        animator.SetBool("idle",false);
                     }
 
                     if (Vector2.Distance(transform.position, patrolPointB.position) < 0.2f)
                     {
-                        if(!isWaiting)
+                        if(isWaiter)
                         {
                             StartCoroutine(Waiting());
                         }
-                        Flip();
+                        moveToA = true;
+                        moveToB = false;
                     }
                 }
             }
