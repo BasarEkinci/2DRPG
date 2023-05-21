@@ -1,18 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TDRPG.Abstracts;
 using UnityEngine;
 
 namespace TDRPG.Managers
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : SingeltonThisObject<GameManager>
     {
-        public static GameManager Instance;
-
         private void Awake()
         {
-            if (Instance == null)
-                Instance = this;
+            SingeltonThisGameObject(this);
         }
     }
 }

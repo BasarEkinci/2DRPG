@@ -1,41 +1,38 @@
 using System;
+using TDRPG.Abstracts;
 using TMPro;
 using UnityEngine;
 
 namespace TDRPG.Managers
 {
-    public class CoinManager : MonoBehaviour
+    public class CoinManager : SingeltonThisObject<CoinManager>
     { 
-
-        public static CoinManager Instance;
+        
 
         [SerializeField] private TMP_Text coinText;
         
-        private float bank;
-        
+        private int coinBank;
+
         private void Awake()
         {
-            if (Instance == null)
-                Instance = this;
-            else
-                Destroy(this);
-            
+            SingeltonThisGameObject(this);
         }
 
         private void Update()
         {
-            coinText.text = bank.ToString("0");
+            coinText.text = coinBank.ToString("0");
         }
 
         public void IncreaseMoney(int coinCollected)
         {
-            bank += coinCollected;
+            coinBank += coinCollected;
         }
 
         public void DecreaseMoney(int coinSpent)
         {
-            bank -= coinSpent;
+            coinBank -= coinSpent;
         }
+        
     }    
 }
 
