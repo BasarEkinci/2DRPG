@@ -14,6 +14,17 @@ namespace TDRPG.PlayerScripts
         [SerializeField] private Image healthBar;
         private Animator animator;
         private bool isImmune;
+
+        public float CurrentHealth
+        {
+            get => currentHealth;
+
+            set
+            {
+                currentHealth = value;
+            }
+        }
+        
         private void Awake()
         {
             animator = GetComponent<Animator>();
