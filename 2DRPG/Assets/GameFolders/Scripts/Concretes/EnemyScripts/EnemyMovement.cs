@@ -72,6 +72,7 @@ namespace TDRPG.EnemyScripts
                     {
                         rb.velocity = new Vector2(moveSpeed * Time.deltaTime, rb.velocity.y);
                     }
+                    
                 }
             }
             

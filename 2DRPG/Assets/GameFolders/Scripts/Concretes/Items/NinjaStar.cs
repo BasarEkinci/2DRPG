@@ -1,5 +1,6 @@
 using System;
 using TDRPG.EnemyScripts;
+using TDRPG.PlayerScripts;
 using UnityEngine;
 
 namespace TDRPG.Items
@@ -9,11 +10,19 @@ namespace TDRPG.Items
         [SerializeField] private float speed;
         [SerializeField] private float damage;
 
+        private PlayerController player;
+
         private Rigidbody2D rb;
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
+            player = FindObjectOfType<PlayerController>();
+        }
+
+        private void Start()
+        {
+            speed *= player.transform.localScale.x;
         }
 
         private void Update()
