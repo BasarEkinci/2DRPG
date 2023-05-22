@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using TDRPG.Abstracts;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace TDRPG.Managers
 {
     public class NinjaStarManager : SingeltonThisObject<NinjaStarManager>
     {
-        private int ninjaStarBank;
+        public int NinjaStarBank { get; set; }
 
         [SerializeField] private TMP_Text starText;
 
@@ -17,20 +18,23 @@ namespace TDRPG.Managers
         {
             SingeltonThisGameObject(this);
         }
+        
 
         private void Update()
         {
-            starText.text = "x" + ninjaStarBank;
+            starText.text = "x" + NinjaStarBank;
         }
 
         public void IncreaseStarAmount(int starCollected)
         {
-            ninjaStarBank += starCollected;
+            NinjaStarBank += starCollected;
+            int starAmount = Mathf.Clamp(NinjaStarBank, 0,10);
+            NinjaStarBank = starAmount;
         }
         
         public void DecreaseStarAmount(int starSpent)
         {
-            ninjaStarBank -= starSpent;
+            NinjaStarBank -= starSpent;
         }
     }    
 }

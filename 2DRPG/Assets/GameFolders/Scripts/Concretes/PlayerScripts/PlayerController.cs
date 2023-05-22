@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TDRPG.EnemyScripts;
+using TDRPG.Managers;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -16,6 +17,7 @@ namespace TDRPG.PlayerScripts
 
         private bool isFacingRight = true;
         private float nextAttack = 0;
+        private float nextStar = 0;
         
         [Header("Movement")]
         [SerializeField] private GameObject groundCheck;
@@ -27,6 +29,8 @@ namespace TDRPG.PlayerScripts
         
         [Header("Attack")]
         [SerializeField] private Transform attackPoint;
+        [SerializeField] private Transform firePoint;
+        [SerializeField] private GameObject ninjaStar;
         [SerializeField] private float attackDistance;
         [SerializeField] private float attackRate = 1f;
         [SerializeField] private LayerMask enemyLayer;
@@ -48,11 +52,27 @@ namespace TDRPG.PlayerScripts
             LeftRight();
             if (Time.time > nextAttack)
             {
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    ThrowStar();
+                    nextStar = Time.time + 1f / attackRate;
+                }
+                
                 if(Input.GetKey(KeyCode.Space))
                 {
                     Attack();
                     nextAttack = Time.time + 1f / attackRate;
                 }
+            }
+        }
+
+        private void ThrowStar()
+        {
+            if(NinjaStarManager.Instance.NinjaStarBank != 0)
+            {
+                Instantiate(ninjaStar, firePoint.position, transform.rotation);
+                NinjaStarManager.Instance.NinjaStarBank -= 1;
             }
         }
         private void LeftRight()
