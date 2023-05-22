@@ -117,6 +117,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   damage: 100
+  groundEffect: {fileID: 5586663111880034336, guid: c03e6bf4eafada54abf406f922a7618a, type: 3}
+  bloodEffect: {fileID: 7264490387406063830, guid: 49a7b778832727245820130997be90df, type: 3}
 --- !u!50 &1096310766
 Rigidbody2D:
   serializedVersion: 4

@@ -9,7 +9,9 @@ namespace TDRPG.Items
     {
         [SerializeField] private float speed;
         [SerializeField] private float damage;
-
+        [SerializeField] private ParticleSystem groundEffect;
+        [SerializeField] private ParticleSystem bloodEffect;
+        
         private PlayerController player;
 
         private Rigidbody2D rb;
@@ -40,6 +42,12 @@ namespace TDRPG.Items
             if (other.gameObject.CompareTag("Enemy"))
             {
                 other.GetComponent<EnemyStats>().TakeDamage(damage);
+                Instantiate(bloodEffect, transform.position, transform.rotation);
+                Destroy(gameObject);
+            }
+            else if (other.gameObject.CompareTag("Ground"))
+            {
+                Instantiate(groundEffect, transform.position, transform.rotation);
                 Destroy(gameObject);
             }
             else
