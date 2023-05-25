@@ -42,7 +42,6 @@ namespace TDRPG.Items
             if (other.gameObject.CompareTag("Enemy"))
             {
                 other.GetComponent<EnemyStats>().TakeDamage(damage);
-                Instantiate(bloodEffect, transform.position, transform.rotation);
                 Destroy(gameObject);
             }
             else if (other.gameObject.CompareTag("Ground"))

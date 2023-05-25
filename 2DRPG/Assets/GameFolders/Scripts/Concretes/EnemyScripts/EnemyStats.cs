@@ -13,6 +13,7 @@ namespace TDRPG.EnemyScripts
         [Header("Effects")]
         [SerializeField] private GameObject deathEffect;
         [SerializeField] private float effectTimer;
+        [SerializeField] private ParticleSystem bloodEffect;
 
         [SerializeField] private Transform playerTransform;
         
@@ -48,6 +49,7 @@ namespace TDRPG.EnemyScripts
             }
             
             GetComponent<SpriteRenderer>().material = hitEffect.hitMat;
+            Instantiate(bloodEffect, transform.position, transform.rotation);
             StartCoroutine("BackToNormal");
 
             if (currentHealth <= 0)

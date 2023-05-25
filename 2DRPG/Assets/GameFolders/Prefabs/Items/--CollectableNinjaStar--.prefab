@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8461690531516287475}
   - component: {fileID: 8461690531516287476}
   - component: {fileID: 8461690531516287477}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: --CollectableNinjaStar--
   m_TagString: Untagged
   m_Icon: {fileID: 0}
