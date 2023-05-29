@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
+using TDRPG.Abstracts;
 using TDRPG.EnemyScripts;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace TDRPG.PlayerScripts
 {
-    public class PlayerHealth : MonoBehaviour
+    public class PlayerHealth : SingeltonThisObject<PlayerHealth>
     {
 
         private float maxHealth = 100f;
@@ -20,14 +21,20 @@ namespace TDRPG.PlayerScripts
             get => currentHealth;
 
             set
-            {
-                currentHealth = value;
-            }
+            { currentHealth = value; }
+        }
+
+        public float MaxHealth
+        {
+            get => maxHealth;
+
+            set { maxHealth = value; }
         }
         
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            SingeltonThisGameObject(this);
         }
 
         private void Start()
@@ -37,7 +44,7 @@ namespace TDRPG.PlayerScripts
 
         private void Update()
         {
-            healthBar.fillAmount = currentHealth / 100f;
+            healthBar.fillAmount = currentHealth / maxHealth;
             
             if (currentHealth >= maxHealth)
             {

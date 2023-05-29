@@ -1,4 +1,3 @@
-using System;
 using TDRPG.Abstracts;
 using TMPro;
 using UnityEngine;
@@ -40,8 +39,9 @@ namespace TDRPG.PlayerScripts
                 currentLevel += 1;
                 expToNextLevel *= 1.7f;
                 currentExperience = 0;
+                PlayerHealth.Instance.CurrentHealth += 20;
+                PlayerHealth.Instance.MaxHealth += 20;
             }
-
         }
     }    
 }
