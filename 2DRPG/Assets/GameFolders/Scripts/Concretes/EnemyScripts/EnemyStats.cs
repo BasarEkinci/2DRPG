@@ -1,4 +1,5 @@
 using System.Collections;
+using TDRPG.PlayerScripts;
 using UnityEngine;
 
 namespace TDRPG.EnemyScripts
@@ -16,10 +17,12 @@ namespace TDRPG.EnemyScripts
         [SerializeField] private ParticleSystem bloodEffect;
 
         [SerializeField] private Transform playerTransform;
+        [SerializeField] private float expToGive;
         
         private Rigidbody2D rigidbody2D;
         private float currentHealth;
         private HitEffect hitEffect;
+        
 
         public float damage = 10f;
 
@@ -38,7 +41,6 @@ namespace TDRPG.EnemyScripts
         {
             currentHealth -= damage;
             
-            
             if (playerTransform.position.x < transform.position.x)
             {
                 rigidbody2D.AddForce(new Vector2(knockBackForceX,knockBackForceY),ForceMode2D.Force);    
@@ -54,6 +56,7 @@ namespace TDRPG.EnemyScripts
 
             if (currentHealth <= 0)
             {
+                Experience.Instance.AddExperience(expToGive);
                 Instantiate(deathEffect, transform.position, transform.rotation);
                 Destroy(gameObject);
             }
