@@ -13,16 +13,35 @@ namespace TDRPG.Managers
         [SerializeField] AudioMixer effectMixer;
 
         private AudioSource[] audioSource;
-
+        private float effectVolume;
+        private float musicVolume;
+        
         private void Awake()
         {
             SingeltonThisGameObject(this);
             audioSource = GetComponentsInChildren<AudioSource>();
         }
 
+        public void SetMusicVolume()
+        {
+            musicMixer.SetFloat("MusicVolume",musicVolume);
+        }
+
+        public void SetEffectVolume()
+        {
+            effectMixer.SetFloat("EffectVolume", effectVolume);
+        }
+        
+        
         private void Start()
         {
-            //PlaySound(5);
+            PlaySound(5);
+        }
+
+        private void Update()
+        {
+            SetEffectVolume();
+            SetMusicVolume();
         }
 
         public void PlaySound(int index)
