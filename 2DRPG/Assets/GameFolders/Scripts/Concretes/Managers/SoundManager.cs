@@ -20,6 +20,11 @@ namespace TDRPG.Managers
             audioSource = GetComponentsInChildren<AudioSource>();
         }
 
+        private void Start()
+        {
+            //PlaySound(5);
+        }
+
         public void PlaySound(int index)
         {
             if(!audioSource[index].isPlaying)
