@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TDRPG.Abstracts;
 using TDRPG.EnemyScripts;
+using TDRPG.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -57,6 +58,7 @@ namespace TDRPG.PlayerScripts
             if (other.gameObject.CompareTag("Enemy") && !isImmune)
             {
                 currentHealth -= other.GetComponent<EnemyStats>().damage;
+                SoundManager.Instance.PlaySound(1);
                 StartCoroutine("Immunity");
                 animator.SetTrigger("HitTrigger");
 

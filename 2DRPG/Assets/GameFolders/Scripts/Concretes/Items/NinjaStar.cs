@@ -1,5 +1,6 @@
 using System;
 using TDRPG.EnemyScripts;
+using TDRPG.Managers;
 using TDRPG.PlayerScripts;
 using UnityEngine;
 
@@ -47,6 +48,7 @@ namespace TDRPG.Items
             else if (other.gameObject.CompareTag("Ground"))
             {
                 Instantiate(groundEffect, transform.position, transform.rotation);
+                SoundManager.Instance.PlaySound(6);
                 Destroy(gameObject);
             }
             else

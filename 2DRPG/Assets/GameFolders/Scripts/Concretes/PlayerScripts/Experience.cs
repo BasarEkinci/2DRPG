@@ -1,4 +1,5 @@
 using TDRPG.Abstracts;
+using TDRPG.Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,6 +38,7 @@ namespace TDRPG.PlayerScripts
             if(currentExperience >= expToNextLevel)
             {
                 currentLevel += 1;
+                SoundManager.Instance.PlaySound(2);
                 expToNextLevel *= 1.7f;
                 currentExperience = 0;
                 PlayerHealth.Instance.CurrentHealth += 20;

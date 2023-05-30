@@ -72,6 +72,7 @@ namespace TDRPG.PlayerScripts
             if(NinjaStarManager.Instance.NinjaStarBank != 0)
             {
                 Instantiate(ninjaStar, firePoint.position, transform.rotation);
+                SoundManager.Instance.PlaySound(3);
                 NinjaStarManager.Instance.NinjaStarBank -= 1;
             }
         }
@@ -104,6 +105,8 @@ namespace TDRPG.PlayerScripts
                 animator.SetTrigger("Attack1");
             else
                 animator.SetTrigger("Attack2");
+            
+            SoundManager.Instance.PlaySound(0);
 
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackDistance, enemyLayer);
 

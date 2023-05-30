@@ -1,4 +1,5 @@
 using System.Collections;
+using TDRPG.Managers;
 using TDRPG.PlayerScripts;
 using UnityEngine;
 
@@ -40,7 +41,7 @@ namespace TDRPG.EnemyScripts
         public void TakeDamage(float damage)
         {
             currentHealth -= damage;
-            
+            SoundManager.Instance.PlaySound(1);
             if (playerTransform.position.x < transform.position.x)
             {
                 rigidbody2D.AddForce(new Vector2(knockBackForceX,knockBackForceY),ForceMode2D.Force);    
@@ -58,6 +59,7 @@ namespace TDRPG.EnemyScripts
             {
                 Experience.Instance.AddExperience(expToGive);
                 Instantiate(deathEffect, transform.position, transform.rotation);
+                SoundManager.Instance.PlaySound(4);
                 Destroy(gameObject);
             }
         }
