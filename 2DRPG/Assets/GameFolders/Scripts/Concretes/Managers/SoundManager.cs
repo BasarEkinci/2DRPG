@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TDRPG.Abstracts;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 namespace TDRPG.Managers
 {
@@ -11,27 +12,20 @@ namespace TDRPG.Managers
     {
         [SerializeField] AudioMixer musicMixer;
         [SerializeField] AudioMixer effectMixer;
-
-        private AudioSource[] audioSource;
-        private float effectVolume;
-        private float musicVolume;
+        [SerializeField] AudioMixer masterMixer;
         
+        [SerializeField] Slider musicSlider;
+        [SerializeField] Slider effectSlider;
+        [SerializeField] Slider masterSlider;
+
+        
+        private AudioSource[] audioSource;
+
         private void Awake()
         {
             SingeltonThisGameObject(this);
             audioSource = GetComponentsInChildren<AudioSource>();
         }
-
-        public void SetMusicVolume()
-        {
-            musicMixer.SetFloat("MusicVolume",musicVolume);
-        }
-
-        public void SetEffectVolume()
-        {
-            effectMixer.SetFloat("EffectVolume", effectVolume);
-        }
-        
         
         private void Start()
         {
@@ -42,8 +36,22 @@ namespace TDRPG.Managers
         {
             SetEffectVolume();
             SetMusicVolume();
+            SetMasterVolume();
         }
 
+        private void SetMusicVolume()
+        {
+            musicMixer.SetFloat("MusicVolume",musicSlider.value);
+        }
+        private void SetEffectVolume()
+        {
+            effectMixer.SetFloat("EffectVolume",effectSlider.value);
+        }
+
+        public void SetMasterVolume()
+        {
+            AudioListener.volume = masterSlider.value;
+        }
         public void PlaySound(int index)
         {
             if(!audioSource[index].isPlaying)
