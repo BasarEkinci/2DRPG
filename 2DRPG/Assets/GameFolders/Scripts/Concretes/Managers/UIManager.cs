@@ -41,6 +41,11 @@ namespace TDRPG.Managers
                 isPaused = false;
             }
         }
+
+        public void MainMenuButton()
+        {
+            GameManager.Instance.LoadScene("MainMenuScene");
+        }
     }    
 }
 

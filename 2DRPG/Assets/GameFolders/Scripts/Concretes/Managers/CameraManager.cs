@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace TDRPG.Managers
 {
-    public class CameraManager : SingeltonThisObject<CameraManager>
+    public class CameraManager : MonoBehaviour
     {
         [SerializeField] private Transform playerTransform;
         [SerializeField] private Transform roomTransform;
@@ -13,7 +13,7 @@ namespace TDRPG.Managers
         [SerializeField] float minModX,maxModX,minModY,maxModY;
         private void Awake()
         {
-            SingeltonThisGameObject(this);
+            
         }
 
         private void LateUpdate()

@@ -12,8 +12,7 @@ namespace TDRPG.Managers
     {
         [SerializeField] AudioMixer musicMixer;
         [SerializeField] AudioMixer effectMixer;
-        [SerializeField] AudioMixer masterMixer;
-        
+
         [SerializeField] Slider musicSlider;
         [SerializeField] Slider effectSlider;
         [SerializeField] Slider masterSlider;

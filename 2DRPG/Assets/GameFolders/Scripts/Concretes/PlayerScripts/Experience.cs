@@ -10,6 +10,7 @@ namespace TDRPG.PlayerScripts
     {
         [SerializeField] private Image expImage;
         [SerializeField] private TMP_Text levelText;
+        [SerializeField] private PlayerHealth playerHealth;
 
         private int currentLevel;
         private float currentExperience;
@@ -41,8 +42,8 @@ namespace TDRPG.PlayerScripts
                 SoundManager.Instance.PlaySound(2);
                 expToNextLevel *= 1.7f;
                 currentExperience = 0;
-                PlayerHealth.Instance.CurrentHealth += 20;
-                PlayerHealth.Instance.MaxHealth += 20;
+                playerHealth.CurrentHealth += 20;
+                playerHealth.MaxHealth += 20;
             }
         }
     }    

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace TDRPG.PlayerScripts
 {
-    public class PlayerHealth : SingeltonThisObject<PlayerHealth>
+    public class PlayerHealth : MonoBehaviour
     {
 
         private float maxHealth = 100f;
@@ -35,7 +35,6 @@ namespace TDRPG.PlayerScripts
         private void Awake()
         {
             animator = GetComponent<Animator>();
-            SingeltonThisGameObject(this);
         }
 
         private void Start()

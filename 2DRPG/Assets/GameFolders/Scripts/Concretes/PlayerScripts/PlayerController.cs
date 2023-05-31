@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TDRPG.Abstracts;
 using TDRPG.EnemyScripts;
 using TDRPG.Managers;
 using Unity.VisualScripting;

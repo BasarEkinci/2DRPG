@@ -11,7 +11,10 @@ namespace TDRPG.Abstracts
         protected void SingeltonThisGameObject(T entity)
         {
             if (Instance == null)
+            {
                 Instance = entity;
+                DontDestroyOnLoad(gameObject);
+            }
             else
                 Destroy(gameObject);
         }
