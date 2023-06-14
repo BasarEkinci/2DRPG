@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TDRPG.Abstracts;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -29,37 +26,31 @@ namespace TDRPG.Managers
         private void Start()
         {
             PlaySound(5);
-        }
 
-        private void Update()
-        {
-            SetEffectVolume();
-            SetMusicVolume();
-            SetMasterVolume();
+            masterSlider.value = PlayerPrefs.GetFloat("MusicVolume",1f);
+            musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
+            effectSlider.value = PlayerPrefs.GetFloat("EffectVolume", 1f);
         }
-
-        private void SetMusicVolume()
+        public void SetMusicVolume()
         {
-            musicMixer.SetFloat("MusicVolume",musicSlider.value);
+            DataManager.Instance.SetMusicData(musicSlider.value);
+            musicMixer.SetFloat("MusicVolume",PlayerPrefs.GetFloat("MusicVolume"));
         }
-        private void SetEffectVolume()
+        public void SetEffectVolume()
         {
-            effectMixer.SetFloat("EffectVolume",effectSlider.value);
+            DataManager.Instance.SetEffectData(effectSlider.value);
+            effectMixer.SetFloat("EffectVolume",PlayerPrefs.GetFloat("EffectVolume"));
         }
 
         public void SetMasterVolume()
         {
-            AudioListener.volume = masterSlider.value;
+            DataManager.Instance.SetMasterVolumeData(masterSlider.value);
+            AudioListener.volume = PlayerPrefs.GetFloat("MasterVolume");
         }
         public void PlaySound(int index)
         {
             if(!audioSource[index].isPlaying)
                 audioSource[index].Play();
-        }
-        public void StopSound(int index)
-        {
-            if(audioSource[index].isPlaying)
-                audioSource[index].Stop();
         }
     }    
 }

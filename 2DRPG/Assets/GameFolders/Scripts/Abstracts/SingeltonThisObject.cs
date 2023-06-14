@@ -8,15 +8,12 @@ namespace TDRPG.Abstracts
     {
         public static T Instance { get; private set; }
 
-        protected void SingeltonThisGameObject(T entity)
+        public void SingeltonThisGameObject(T entity)
         {
             if (Instance == null)
             {
                 Instance = entity;
-                DontDestroyOnLoad(gameObject);
             }
-            else
-                Destroy(gameObject);
         }
     }    
 }

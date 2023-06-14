@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TDRPG.Abstracts;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace TDRPG.Managers
 {
@@ -19,7 +15,7 @@ namespace TDRPG.Managers
             SingeltonThisGameObject(this);
         }
         
-
+        
         private void Update()
         {
             starText.text = "x" + NinjaStarBank;
